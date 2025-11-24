@@ -34,33 +34,88 @@
                 linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-3));
             min-height:100vh;
             color:var(--dark);
-            padding:32px 16px;
+            padding:24px 12px 32px;
         }
 
-        .page-wrapper { max-width:1120px; margin:0 auto; }
+        .page {
+            max-width:920px;
+            margin:0 auto;
+        }
 
-        header {
+        /* Верхняя мини-панель */
+
+        .top-row {
             display:flex;
             justify-content:space-between;
             align-items:center;
-            margin-bottom:26px;
+            margin-bottom:16px;
+            gap:10px;
             flex-wrap:wrap;
-            gap:16px;
         }
 
-        .logo {
+        .top-name {
+            font-size:13px;
+            color:var(--light);
+            opacity:.9;
+        }
+
+        .top-links a {
+            font-size:12px;
+            text-decoration:none;
+            color:var(--light);
+            padding:4px 10px;
+            border-radius:999px;
+            border:1px solid rgba(255,255,255,.6);
+            margin-left:4px;
+            background:rgba(255,255,255,.08);
+        }
+
+        /* Главная карточка */
+
+        .card-main {
+            background:rgba(255,255,255,.96);
+            border-radius:28px;
+            box-shadow:var(--shadow-soft);
+            padding:20px;
+            display:grid;
+            grid-template-columns:1.1fr 1fr;
+            gap:18px;
+            margin-bottom:18px;
+        }
+
+        .card-photo {
+            border-radius:22px;
+            overflow:hidden;
+            box-shadow:0 14px 26px rgba(0,0,0,.22);
+            min-height:220px;
+        }
+
+        .card-photo img {
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+
+        .card-info {
             display:flex;
-            gap:14px;
+            flex-direction:column;
+            justify-content:space-between;
+            gap:12px;
+        }
+
+        .card-header {
+            display:flex;
             align-items:center;
+            gap:10px;
         }
 
         .avatar {
-            width:52px;
-            height:52px;
+            width:44px;
+            height:44px;
             border-radius:50%;
             overflow:hidden;
             box-shadow:0 8px 18px rgba(0,0,0,.25);
-            border:3px solid rgba(255,255,255,.9);
+            border:2px solid rgba(255,255,255,.9);
             flex-shrink:0;
         }
 
@@ -70,293 +125,326 @@
             object-fit:cover;
         }
 
-        .logo-text-main {
+        .card-name {
+            font-size:16px;
             font-weight:700;
-            letter-spacing:0.03em;
+            letter-spacing:.04em;
         }
 
-        .logo-text-sub {
+        .card-tagline {
             font-size:12px;
             color:var(--text-muted);
         }
 
-        nav a {
-            text-decoration:none;
-            padding:8px 14px;
-            background:rgba(255,255,255,.7);
-            border-radius:999px;
-            color:var(--dark);
-            margin:3px;
-            font-size:13px;
-            box-shadow:0 0 0 1px rgba(255,255,255,.7);
-        }
-
-        .hero-card {
-            background:white;
-            border-radius:32px;
-            padding:28px;
-            box-shadow:var(--shadow-soft);
-            display:grid;
-            grid-template-columns:1.4fr 1fr;
-            gap:24px;
-            margin-bottom:32px;
-        }
-
         .hero-title {
-            font-size:32px;
+            font-size:22px;
             font-family:'Montserrat', sans-serif;
-            line-height:1.2;
-            margin-bottom:12px;
+            font-weight:700;
+            line-height:1.3;
         }
 
-        .hero-title-colored {
+        .hero-title span {
             background:linear-gradient(120deg, var(--accent), var(--accent-2));
             -webkit-background-clip:text;
             color:transparent;
-            font-weight:800;
         }
 
-        .hero-subtitle {
-            font-size:14px;
+        .hero-text {
+            font-size:13px;
             color:var(--text-muted);
-            margin-bottom:18px;
+        }
+
+        .chips {
+            display:flex;
+            flex-wrap:wrap;
+            gap:6px;
+            margin:4px 0 6px;
+        }
+
+        .chip {
+            font-size:11px;
+            padding:4px 10px;
+            border-radius:999px;
+            background:rgba(58,134,255,.06);
+            color:#27406a;
         }
 
         .btn-primary {
-            padding:10px 20px;
+            padding:9px 16px;
             border-radius:999px;
             background:linear-gradient(135deg, var(--accent), var(--accent-3));
             color:#fff;
             text-decoration:none;
             font-weight:600;
+            font-size:13px;
             display:inline-flex;
             align-items:center;
             gap:6px;
-            box-shadow:0 12px 20px rgba(255,107,107,.4);
+            box-shadow:0 10px 18px rgba(255,107,107,.35);
             border:none;
             cursor:pointer;
+            margin-top:4px;
         }
 
         .btn-primary span {
             font-size:18px;
         }
 
-        .section { margin-bottom:26px; }
-        .section-title { font-size:20px; font-weight:700; margin-bottom:10px; }
-        .section-text { color:var(--text-muted); margin-bottom:10px; }
+        .note-small {
+            font-size:11px;
+            color:var(--text-muted);
+            margin-top:4px;
+        }
 
-        .cards-grid-3 {
+        /* Компактные блоки */
+
+        .grid-mini {
             display:grid;
-            grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
-            gap:14px;
+            grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+            gap:12px;
+            margin-bottom:18px;
         }
 
-        .info-card {
-            background:white;
-            padding:16px;
+        .mini-card {
+            background:rgba(255,255,255,.96);
             border-radius:20px;
+            padding:12px 14px;
             box-shadow:var(--shadow-light);
+            font-size:13px;
         }
 
-        /* QR-блок справа в hero */
-        .contact-qr {
-            margin-top:8px;
-            padding:12px;
-            background:rgba(255,255,255,.8);
+        .mini-title {
+            font-weight:600;
+            margin-bottom:4px;
+        }
+
+        .mini-text {
+            color:var(--text-muted);
+            font-size:12px;
+        }
+
+        /* Цены */
+
+        .price-row {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+            gap:10px;
+            margin-top:6px;
+        }
+
+        .price-item {
+            background:rgba(255,255,255,.96);
             border-radius:18px;
-            text-align:center;
+            padding:10px 12px;
+            box-shadow:var(--shadow-light);
+            font-size:13px;
         }
 
-        .qr-image {
-            max-width:100%;
-            border-radius:20px;
-            margin-bottom:8px;
+        .price-label {
+            font-weight:600;
         }
 
-        /* Блок ОБО МНЕ с большим фото */
-        .about-block {
-            background:rgba(255,255,255,.92);
-            border-radius:26px;
-            padding:22px;
+        .price-desc {
+            font-size:12px;
+            color:var(--text-muted);
+        }
+
+        .price-value {
+            font-weight:700;
+            color:var(--accent);
+            margin-top:4px;
+        }
+
+        /* Контакты с QR */
+
+        .contact-card {
+            background:rgba(255,255,255,.96);
+            border-radius:24px;
+            padding:14px 16px;
             box-shadow:var(--shadow-light);
             display:grid;
-            grid-template-columns:1.2fr 1fr;
-            gap:18px;
+            grid-template-columns:auto 1fr;
+            gap:14px;
             align-items:center;
         }
 
-        .about-photo-wrapper {
-            border-radius:22px;
-            overflow:hidden;
-            box-shadow:0 16px 30px rgba(0,0,0,.22);
+        .qr-box {
+            max-width:130px;
         }
 
-        .about-photo-wrapper img {
+        .qr-box img {
             width:100%;
-            height:100%;
-            object-fit:cover;
+            border-radius:18px;
+            display:block;
+        }
+
+        .contact-text-main {
+            font-weight:600;
+            margin-bottom:4px;
+            font-size:14px;
+        }
+
+        .contact-text-sub {
+            font-size:12px;
+            color:var(--text-muted);
+            margin-bottom:8px;
         }
 
         footer {
             text-align:center;
-            margin-top:20px;
-            font-size:12px;
-            color:white;
+            margin-top:18px;
+            font-size:11px;
+            color:rgba(255,255,255,.9);
         }
 
         @media (max-width: 768px) {
-            header {
-                justify-content:center;
-                text-align:center;
-            }
-            nav { text-align:center; }
-            .hero-card {
+            .card-main {
                 grid-template-columns:1fr;
+                padding:16px;
             }
-            .about-block {
+            .card-photo { min-height:200px; }
+            .contact-card {
                 grid-template-columns:1fr;
+                text-align:left;
+            }
+            .qr-box {
+                max-width:120px;
+                margin:0 auto;
             }
         }
     </style>
 </head>
 
 <body>
-<div class="page-wrapper">
+<div class="page">
+    <div class="top-row">
+        <div class="top-name">Елена Владимировна · репетитор английского онлайн</div>
+        <div class="top-links">
+            <a href="https://t.me/HAPPYHELENGR" target="_blank">@HAPPYHELENGR</a>
+        </div>
+    </div>
 
-    <header>
-        <div class="logo">
-            <div class="avatar">
-                <img src="me.jpg" alt="Елена Владимировна, репетитор английского">
-            </div>
+    <!-- Главная компактная карточка -->
+    <section class="card-main">
+        <div class="card-photo">
+            <img src="me.jpg" alt="Елена Владимировна на уроке английского языка">
+        </div>
+
+        <div class="card-info">
             <div>
-                <div class="logo-text-main">ЕЛЕНА ВЛАДИМИРОВНА</div>
-                <div class="logo-text-sub">Онлайн-репетитор английского · @HAPPYHELENGR</div>
-            </div>
-        </div>
+                <div class="card-header">
+                    <div class="avatar">
+                        <img src="me.jpg" alt="Елена Владимировна">
+                    </div>
+                    <div>
+                        <div class="card-name">ЕЛЕНА ВЛАДИМИРОВНА</div>
+                        <div class="card-tagline">Онлайн-репетитор английского языка</div>
+                    </div>
+                </div>
 
-        <nav>
-            <a href="#about">Обо мне</a>
-            <a href="#formats">Форматы</a>
-            <a href="#prices">Цены</a>
-            <a href="#contact">Записаться</a>
-        </nav>
-    </header>
+                <h1 class="hero-title">
+                    Английский, <span>который приятно говорить</span>
+                </h1>
+                <p class="hero-text">
+                    Помогаю подросткам и взрослым заговорить уверенно для учёбы, работы,
+                    путешествий и переезда. Уроки проходят онлайн, в спокойной и поддерживающей атмосфере.
+                </p>
 
-    <section class="hero-card">
-        <div>
-            <h1 class="hero-title">
-                Английский, <span class="hero-title-colored">который хочется говорить</span>
-            </h1>
-            <p class="hero-subtitle">
-                Помогаю подросткам и взрослым заговорить уверенно: учеба, работа, путешествия, переезд.
-                Уроки онлайн, с заботой о вашем темпе и целях.
-            </p>
-
-            <a href="https://t.me/HAPPYHELENGR" target="_blank" class="btn-primary">
-                <span>✈</span> Написать в Telegram @HAPPYHELENGR
-            </a>
-        </div>
-
-        <div>
-            <div class="contact-qr">
-                <img src="qr.jpeg" class="qr-image" alt="QR-код Telegram @HAPPYHELENGR">
-                <div style="font-size:12px; color:var(--text-muted);">
-                    Сканируйте QR или нажмите на кнопку, чтобы написать мне в Telegram.
+                <div class="chips">
+                    <div class="chip">разговорный английский</div>
+                    <div class="chip">экзамены и собеседования</div>
+                    <div class="chip">подростки и взрослые</div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section id="about" class="section">
-        <h2 class="section-title">Обо мне</h2>
-
-        <div class="about-block">
             <div>
-                <p class="section-text">
-                    Я преподаю английский более 10 лет для детей, подростков и взрослых. Помогаю:
-                    уверенно заговорить, подготовиться к экзаменам, пройти собеседование,
-                    переехать в другую страну или чувствовать себя свободнее в путешествиях.
-                </p>
-                <p class="section-text">
-                    На уроках много практики: живые диалоги, разбор реальных ситуаций,
-                    современная лексика, фильмы, сериалы и игры. Я за поддерживающую и
-                    дружелюбную атмосферу — чтобы вам было комфортно и не страшно говорить.
-                </p>
-            </div>
-
-            <div class="about-photo-wrapper">
-                <img src="me.jpg" alt="Елена Владимировна на уроке английского языка">
+                <a href="https://t.me/HAPPYHELENGR" target="_blank" class="btn-primary">
+                    <span>✈</span> Написать в Telegram @HAPPYHELENGR
+                </a>
+                <div class="note-small">Отвечу лично, помогу выбрать формат и уровень нагрузки.</div>
             </div>
         </div>
     </section>
 
-    <section id="formats" class="section">
-        <h2 class="section-title">Форматы занятий</h2>
+    <!-- Короткие блоки обо мне / форматы / кому подойдёт -->
+    <section class="grid-mini">
+        <div class="mini-card">
+            <div class="mini-title">Обо мне</div>
+            <p class="mini-text">
+                Работаю с мотивированными подростками и взрослыми. Люблю живой язык, реальные
+                диалоги и прогресс, который видно уже через несколько недель.
+            </p>
+        </div>
 
-        <div class="cards-grid-3">
-            <div class="info-card">
-                <strong>Индивидуальные уроки</strong>
-                <p class="section-text">
-                    Полностью под ваши цели: с нуля или прокачка уже имеющегося уровня.
-                    Домашние задания, поддержка между занятиями.
-                </p>
-            </div>
+        <div class="mini-card">
+            <div class="mini-title">Форматы занятий</div>
+            <p class="mini-text">
+                Индивидуальные уроки, мини-группы 2–4 человека и разговорный клуб.
+                Подберём формат под ваши цели и график.
+            </p>
+        </div>
 
-            <div class="info-card">
-                <strong>Мини-группы 2–4 человека</strong>
-                <p class="section-text">
-                    Живая разговорная практика, игры, обсуждения фильмов и книг.
-                    Комфортно, но с лёгким вызовом.
-                </p>
-            </div>
-
-            <div class="info-card">
-                <strong>Разговорный клуб</strong>
-                <p class="section-text">
-                    60 минут разговорной практики в неделю. Поддержка уровня и уверенности
-                    в речи без сложной грамматики.
-                </p>
-            </div>
+        <div class="mini-card">
+            <div class="mini-title">Кому подойдёт</div>
+            <p class="mini-text">
+                Если вы стесняетесь говорить, боитесь ошибок или «застряли» на одном уровне — 
+                начнём с мягкого разгона и постепенно добавим уверенности.
+            </p>
         </div>
     </section>
 
-    <section id="prices" class="section">
-        <h2 class="section-title">Цены</h2>
-        <p class="section-text">
-            • Индивидуальное занятие 50–60 минут — от 1100 ₽.<br>
-            • Мини-группа — от 850 ₽ с человека.<br>
-            • Разговорный клуб — по запросу.
-        </p>
-        <p class="section-text">
-            Полный актуальный прайс и доступные слоты отправлю в Telegram после вашего сообщения.
+    <!-- Цены в компактных карточках -->
+    <section style="margin-bottom:18px;">
+        <div class="mini-title" style="margin-bottom:4px;">Цены</div>
+        <div class="price-row">
+            <div class="price-item">
+                <div class="price-label">Индивидуальное занятие</div>
+                <div class="price-desc">50–60 минут, программа под ваши цели</div>
+                <div class="price-value">от 1 100 ₽</div>
+            </div>
+
+            <div class="price-item">
+                <div class="price-label">Мини-группа 2–4 человека</div>
+                <div class="price-desc">разговорная практика и поддержка</div>
+                <div class="price-value">от 900 ₽ с человека</div>
+            </div>
+
+            <div class="price-item">
+                <div class="price-label">Разговорный клуб</div>
+                <div class="price-desc">поддержка уровня и уверенности</div>
+                <div class="price-value">стоимость — по запросу</div>
+            </div>
+        </div>
+        <p class="mini-text" style="margin-top:6px;">
+            Полный актуальный прайс и свободные слоты отправлю в Telegram по запросу.
         </p>
     </section>
 
-    <section id="contact" class="section">
-        <h2 class="section-title">Связаться со мной</h2>
-
-        <a href="https://t.me/HAPPYHELENGR" target="_blank" class="btn-primary">
-            <span>💬</span> Написать в Telegram
-        </a>
-
-        <div class="contact-qr" style="margin-top:14px;">
-            <img src="qr.jpeg" class="qr-image" alt="QR-код Telegram @HAPPYHELENGR">
-            <div style="font-size:12px; color:var(--text-muted);">
-                Сканируйте QR-код камерой телефона — вы сразу попадёте в мой Telegram.
+    <!-- Контакты и QR -->
+    <section class="contact-card">
+        <div class="qr-box">
+            <img src="qr.jpeg" alt="QR-код Telegram @HAPPYHELENGR">
+        </div>
+        <div>
+            <div class="contact-text-main">Связаться со мной</div>
+            <div class="contact-text-sub">
+                Сканируйте QR-код камерой телефона или нажмите на кнопку — вы попадёте в мой Telegram.
+                Можно сразу написать, для кого ищете занятия и на каком уровне сейчас английский.
             </div>
+            <a href="https://t.me/HAPPYHELENGR" target="_blank" class="btn-primary">
+                <span>💬</span> Написать в Telegram
+            </a>
         </div>
     </section>
 
     <footer>
-        © <span id="year"></span> Елена Владимировна · Репетитор английского языка
+        © <span id="year"></span> Елена Владимировна · репетитор английского языка
     </footer>
-
 </div>
 
 <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 </script>
-
 </body>
 </html>
 
