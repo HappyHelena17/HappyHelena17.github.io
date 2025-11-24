@@ -254,6 +254,74 @@
             color:var(--accent);
             margin-top:4px;
         }
+        /* Отзывы */
+
+        .review-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+            gap:12px;
+            margin-bottom:18px;
+        }
+
+        .review-card {
+            background:rgba(255,255,255,.96);
+            border-radius:18px;
+            padding:12px 14px;
+            box-shadow:var(--shadow-light);
+            font-size:13px;
+        }
+
+        .review-text {
+            font-size:12px;
+            color:var(--text-muted);
+            margin-bottom:6px;
+        }
+
+        .review-name {
+            font-size:12px;
+            font-weight:600;
+        }
+
+        .review-tag {
+            font-size:11px;
+            color:var(--text-muted);
+        }
+    <!-- Отзывы учеников -->
+    <section>
+        <div class="mini-title" style="margin-bottom:6px;">Отзывы учеников</div>
+
+        <div class="review-grid">
+            <div class="review-card">
+                <p class="review-text">
+                    «Я всегда стеснялась говорить на английском, а сейчас спокойно
+                    отвечаю на уроках и даже завела переписку с подругой из другой страны.
+                    На занятиях комфортно и понятно, ошибки перестали быть страшными».
+                </p>
+                <div class="review-name">Мария, 14 лет</div>
+                <div class="review-tag">подготовка к школе и разговорный английский</div>
+            </div>
+
+            <div class="review-card">
+                <p class="review-text">
+                    «Готовились к собеседованию в международную компанию. 
+                    Разобрали типичные вопросы, отработали ответы. 
+                    В итоге собеседование прошло спокойно, меня приняли на работу».
+                </p>
+                <div class="review-name">Алексей, 32 года</div>
+                <div class="review-tag">деловой и разговорный английский</div>
+            </div>
+
+            <div class="review-card">
+                <p class="review-text">
+                    «Ребёнок ждал занятий, как встречу с хорошей знакомой. 
+                    Появилась мотивация и уверенность, заметно подтянули оценки 
+                    и стали смотреть мультфильмы в оригинале».
+                </p>
+                <div class="review-name">Анна</div>
+                <div class="review-tag">мама ученика, 10 лет</div>
+            </div>
+        </div>
+    </section>
 
         /* Контакты с QR */
 
@@ -346,9 +414,10 @@
                     Английский, <span>который приятно говорить</span>
                 </h1>
                 <p class="hero-text">
-                    Помогаю детям,подросткам и взрослым заговорить уверенно для учёбы, работы,
-                    путешествий и переезда. Уроки проходят онлайн, в спокойной и поддерживающей атмосфере.
-                </p>
+    Помогаю детям, подросткам и взрослым заговорить уверенно для учёбы, работы,
+    путешествий или переезда. Уроки проходят онлайн, в спокойной и поддерживающей атмосфере.
+</p>
+
 
                 <div class="chips">
                     <div class="chip">разговорный английский</div>
