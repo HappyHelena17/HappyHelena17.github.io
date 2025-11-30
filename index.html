@@ -87,16 +87,19 @@
     border-radius:22px;
     overflow:hidden;
     box-shadow:0 14px 26px rgba(0,0,0,.22);
-    min-height:140px; /* было 220 */
-    max-height:160px; /* добавили ограничитель */
+    min-height:80px;   /* было 220 → теперь очень компактное */
+    max-height:90px;   /* ограничиваем размер */
+
 }
 
 
-        .card-photo img {
-            width:100%;
-            height:100%;
-            object-fit:cover;
-        }
+
+      .card-photo img {
+    width:100%;
+    height:auto;      /* чтобы не растягивалось */
+    object-fit:cover;
+}
+
 
         .card-info {
             display:flex;
