@@ -94,11 +94,14 @@
 
 
 
-      .card-photo img {
-    width:100%;
-    height:auto;      /* чтобы не растягивалось */
-    object-fit:cover;
+     .card-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;   /* Показывает фото целиком */
+    object-position: top center;  /* Центрируем лицо сверху */
+    background: #fff; /* заполняет поля, если фото не вписывается */
 }
+
 
 
         .card-info {
