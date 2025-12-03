@@ -531,7 +531,140 @@
                 <div class="review-tag">английский для детей и школьников</div>
             </div>
         </section>
+<!-- 🎄 Ёлка желаний -->
+<section id="gift-tree" style="scroll-margin-top:80px; margin:24px 0; text-align:center;">
+  <div class="mini-title" style="margin-bottom:16px;">🎄 Подарки под ёлкой — выберите один</div>
+  <p style="font-size:13px; color:var(--text-muted); max-width:500px; margin:0 auto 20px;">
+    Все коробки одинаковые — внутри каждого свой сюрприз. Выберите любую: открыть можно только один раз.
+  </p>
 
+  <!-- Ёлка (SVG) -->
+  <div style="max-width:180px; margin:0 auto 20px;">
+    <svg viewBox="0 0 100 130" style="width:100%; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.12));">
+      <rect x="42" y="105" width="16" height="15" fill="#5D4037" rx="2"/>
+      <polygon points="25,100 75,100 50,65" fill="#2E7D32"/>
+      <polygon points="30,70 70,70 50,40" fill="#388E3C"/>
+      <polygon points="35,45 65,45 50,20" fill="#43A047"/>
+      <polygon points="50,5 53,16 65,16 56,23 60,35 50,28 40,35 44,23 35,16 47,16" 
+               fill="#FFD700" stroke="#FFC107" stroke-width="0.5"/>
+    </svg>
+  </div>
+
+  <!-- Подарки: все одинаковые -->
+  <div id="gift-boxes" style="display:flex; flex-wrap:wrap; justify-content:center; gap:14px; max-width:380px; margin:0 auto 20px;">
+    <div class="gift-box" data-gift="lesson">🎁</div>
+    <div class="gift-box" data-gift="discount10">🎁</div>
+    <div class="gift-box" data-gift="pdf">🎁</div>
+    <div class="gift-box" data-gift="vip">🎁</div>
+    <div class="gift-box" data-gift="letter">🎁</div>
+  </div>
+
+  <style>
+    .gift-box {
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff9e9e, #ff6b6b);
+      border-radius: 12px;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(255,107,107,0.3);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .gift-box::after {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%; width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .gift-box:hover {
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: 0 10px 20px rgba(255,107,107,0.4);
+    }
+    .gift-box:hover::after {
+      opacity: 1;
+    }
+    .gift-box.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+  </style>
+
+  <!-- Открытый подарок -->
+  <div id="gift-reveal" style="display:none; margin-top:20px; padding:20px; background:rgba(255,255,255,0.96); border-radius:20px; box-shadow:var(--shadow-light); max-width:420px; margin-left:auto; margin-right:auto;">
+    <div id="reveal-icon" style="font-size:48px; margin-bottom:12px;">🎁</div>
+    <div class="reveal-title" id="reveal-title" style="font-weight:700; font-size:17px; margin-bottom:8px; color:var(--dark);">Ваш подарок</div>
+    <div class="reveal-desc" id="reveal-desc" style="font-size:13px; color:var(--text-muted); line-height:1.5; margin-bottom:16px;">Скоро вы увидите, что внутри...</div>
+    <a id="reveal-btn" href="https://t.me/HAPPYHELENGR" target="_blank" class="btn-primary" style="padding:10px 20px;">🎁 Забрать в Telegram</a>
+  </div>
+
+  <div id="gift-used" style="display:none; font-size:13px; color:var(--text-muted); margin-top:12px;">
+    ✅ Подарок уже получен — спасибо, что доверяете! 💌
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Проверяем, брали ли уже подарок
+    if (localStorage.getItem('gift_taken')) {
+      document.getElementById('gift-boxes').style.display = 'none';
+      document.getElementById('gift-used').style.display = 'block';
+      return;
+    }
+
+    // Подарки
+    const gifts = {
+      lesson: { icon: '🎓', title: 'Бесплатный пробный урок', desc: '50 минут без обязательств — просто познакомимся и поговорим.' },
+      discount10: { icon: '❄️', title: 'Скидка 10% на первый месяц', desc: 'На первые 4 занятия — чтобы старт был мягким и уверенным.' },
+      pdf: { icon: '📘', title: 'ПДФ-«Зимний Survival Kit»', desc: '20 самых нужных фраз + аудио от меня — чтобы не замерзнуть в диалоге даже в Норвегии.' },
+      vip: { icon: '👑', title: 'Приоритет в расписании', desc: 'Мягкий VIP: первое место в расписании, гибкое время и план за 24 часа.' },
+      letter: { icon: '✉️', title: 'Письмо-вдохновение от меня', desc: 'Личное письмо с 3 советами, которые изменили мой путь в языке — и открытым вопросом, чтобы начать разговор.' }
+    };
+
+    const boxes = document.querySelectorAll('.gift-box');
+    const reveal = document.getElementById('gift-reveal');
+    const icon = document.getElementById('reveal-icon');
+    const title = document.getElementById('reveal-title');
+    const desc = document.getElementById('reveal-desc');
+    const btn = document.getElementById('reveal-btn');
+
+    boxes.forEach(box => {
+      box.addEventListener('click', () => {
+        if (localStorage.getItem('gift_taken')) return;
+
+        const giftId = box.getAttribute('data-gift');
+        const g = gifts[giftId];
+
+        // Отключаем все коробки
+        boxes.forEach(b => b.classList.add('disabled'));
+
+        // Анимация исчезновения
+        box.style.transition = 'all 0.5s';
+        box.style.opacity = '0';
+        box.style.transform = 'scale(0.5)';
+
+        setTimeout(() => {
+          // Показываем результат
+          icon.textContent = g.icon;
+          title.textContent = g.title;
+          desc.textContent = g.desc;
+          btn.href = `https://t.me/HAPPYHELENGR?text=${encodeURIComponent('Привет, Елена! Я выбрал(а) подарок: ' + g.title + '. Готов(а) начать!')}`;
+          reveal.style.display = 'block';
+
+          // Сохраняем
+          localStorage.setItem('gift_taken', 'true');
+        }, 500);
+      });
+    });
+  });
+</script>
         <!-- Контакты -->
         <section class="contact-card" id="contact" style="scroll-margin-top: 80px;">
             <div class="qr-box">
