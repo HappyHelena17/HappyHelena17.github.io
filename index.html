@@ -640,103 +640,127 @@
         </footer>
     </div>
 
-    <script>
-        document.getElementById("year").textContent = new Date().getFullYear();
+ <script>
+// Год в подвале
+document.getElementById("year").textContent = new Date().getFullYear();
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 60,
-                        behavior: 'smooth'
-                    });
+// Плавный скролл по якорям
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - 60,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Подсветка активного пункта меню
+const sections = document.querySelectorAll('section[id], #top');
+const navLinks = document.querySelectorAll('.nav-link');
+
+const highlightNav = () => {
+    let scrollPos = window.scrollY + 60;
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                    link.style.fontWeight = '700';
+                    link.style.color = '#ff6b6b';
+                } else if (link.getAttribute('href')?.startsWith('#')) {
+                    link.style.fontWeight = '400';
+                    link.style.color = '';
                 }
             });
+        }
+    });
+};
+
+window.addEventListener('scroll', highlightNav);
+highlightNav();
+
+// 🎁❄️ ЁЛКА: снег + подарки
+document.addEventListener('DOMContentLoaded', () => {
+    // --- СНЕГ ---
+    const container = document.getElementById('snow-container');
+    if (container) {
+        const count = 12;
+        for (let i = 0; i < count; i++) {
+            const flake = document.createElement('div');
+            flake.className = 'snowflake';
+            flake.innerHTML = '❄';
+            flake.style.left = Math.random() * 100 + '%';
+            flake.style.fontSize = (8 + Math.random() * 6) + 'px';
+            flake.style.opacity = 0.4 + Math.random() * 0.4;
+            flake.style.animationDuration = (5 + Math.random() * 5) + 's';
+            flake.style.animationDelay = Math.random() * 3 + 's';
+            container.appendChild(flake);
+        }
+    }
+
+    // --- ПОДАРКИ ---
+    const giftBoxes = document.querySelectorAll('.gift-box');
+    const giftReveal = document.getElementById('gift-reveal');
+    const giftUsed = document.getElementById('gift-used');
+    const iconEl = document.getElementById('reveal-icon');
+    const titleEl = document.getElementById('reveal-title');
+    const descEl = document.getElementById('reveal-desc');
+    const btnEl = document.getElementById('reveal-btn');
+
+    const gifts = {
+        lesson:  { icon: '🎓', title: 'Бесплатный урок', desc: '50 минут без обязательств — просто познакомимся.' },
+        discount10: { icon: '❄️', title: 'Скидка 10%', desc: 'Скидка 10% на первый месяц занятий.' },
+        pdf:    { icon: '📘', title: 'PDF «Survival Kit»', desc: '20 фраз + аудио — чтобы не «замерзнуть» в диалоге.' },
+        vip:    { icon: '👑', title: 'Приоритет в расписании', desc: 'Гибкое время и индивидуальный план за 24 часа.' },
+        letter: { icon: '✉️', title: 'Письмо от Елены', desc: 'С 3 персональными советами и вопросом, чтобы начать разговор.' }
+    };
+
+    // Если подарок уже был выбран
+    if (localStorage.getItem('gift_taken')) {
+        document.getElementById('gift-boxes').style.display = 'none';
+        giftUsed.style.display = 'block';
+        return;
+    }
+
+    giftBoxes.forEach(box => {
+        box.addEventListener('click', () => {
+            if (localStorage.getItem('gift_taken')) return;
+
+            const id = box.getAttribute('data-gift');
+            const g = gifts[id];
+            if (!g) return;
+
+            giftBoxes.forEach(b => b.classList.add('disabled'));
+
+            box.style.transition = 'all 0.5s';
+            box.style.opacity = '0';
+            box.style.transform = 'scale(0.5)';
+
+            setTimeout(() => {
+                iconEl.textContent = g.icon;
+                titleEl.textContent = g.title;
+                descEl.textContent = g.desc;
+
+                btnEl.href =
+                    `https://t.me/HAPPYHELENGR?text=${encodeURIComponent(
+                        'Привет, Елена! Я выбрал(а) подарок: ' + g.title + '. Готов(а) начать! 🎁'
+                    )}`;
+
+                giftReveal.style.display = 'block';
+                localStorage.setItem('gift_taken', 'true');
+            }, 500);
         });
+    });
+});
+</script>
 
-        const sections = document.querySelectorAll('section[id], #top');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        const highlightNav = () => {
-            let scrollPos = window.scrollY + 60;
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                const sectionId = section.getAttribute('id');
-                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                    navLinks.forEach(link => {
-                        link.style.fontWeight = link.getAttribute('href') === `#${sectionId}` ? '700' : '400';
-                        link.style.color = link.getAttribute('href') === `#${sectionId}` ? '#ff6b6b' : '';
-                    });
-                }
-            });
-        };
-
-        window.addEventListener('scroll', highlightNav);
-        highlightNav();
-
-        // 🎁❄️ ЁЛКА: СНЕГ + ПОДАРКИ (всё в одном — работает на GitHub Pages)
-        document.addEventListener('DOMContentLoaded', () => {
-            // Снег
-            const container = document.getElementById('snow-container');
-            if (container) {
-                const count = 12;
-                for (let i = 0; i < count; i++) {
-                    const flake = document.createElement('div');
-                    flake.className = 'snowflake';
-                    flake.innerHTML = '❄';
-                    flake.style.left = Math.random() * 100 + '%';
-                    flake.style.fontSize = (8 + Math.random() * 6) + 'px';
-                    flake.style.opacity = 0.4 + Math.random() * 0.4;
-                    flake.style.animationDuration = (5 + Math.random() * 5) + 's';
-                    flake.style.animationDelay = Math.random() * 3 + 's';
-                    container.appendChild(flake);
-                }
-            }
-
-            // Подарки
-            if (localStorage.getItem('gift_taken')) {
-                document.getElementById('gift-boxes')?.style.display = 'none';
-                document.getElementById('gift-used')?.style.display = 'block';
-                return;
-            }
-
-            const gifts = {
-                lesson: { icon: '🎓', title: 'Бесплатный урок', desc: '50 минут без обязательств — просто познакомимся.' },
-                discount10: { icon: '❄️', title: 'Скидка 10%', desc: 'На первый месяц занятий.' },
-                pdf: { icon: '📘', title: 'ПДФ-«Survival Kit»', desc: '20 фраз + аудио — чтобы не замерзнуть в диалоге.' },
-                vip: { icon: '👑', title: 'Приоритет в расписании', desc: 'Гибкое время и план за 24 часа.' },
-                letter: { icon: '✉️', title: 'Письмо от Елены', desc: 'С 3 советами и открытым вопросом — чтобы начать разговор.' }
-            };
-
-            document.querySelectorAll('.gift-box').forEach(box => {
-                box.addEventListener('click', () => {
-                    if (localStorage.getItem('gift_taken')) return;
-                    
-                    const id = box.getAttribute('data-gift');
-                    const g = gifts[id];
-                    
-                    document.querySelectorAll('.gift-box').forEach(b => b.classList.add('disabled'));
-                    box.style.transition = 'all 0.5s';
-                    box.style.opacity = '0';
-                    box.style.transform = 'scale(0.5)';
-
-                    setTimeout(() => {
-                        document.getElementById('reveal-icon').textContent = g.icon;
-                        document.getElementById('reveal-title').textContent = g.title;
-                        document.getElementById('reveal-desc').textContent = g.desc;
-                        document.getElementById('reveal-btn').href = 
-                          `https://t.me/HAPPYHELENGR?text=${encodeURIComponent('Привет! Я выбрал(а) подарок: ' + g.title + '. Готов(а) начать!')}`;
-                        document.getElementById('gift-reveal').style.display = 'block';
-                        localStorage.setItem('gift_taken', 'true');
-                    }, 500);
-                });
-            });
-        });
-    </script>
 </body>
 </html>
